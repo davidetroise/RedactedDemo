@@ -9,14 +9,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isRedacted: Bool = true
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            if isRedacted {
+                CreditCardView()
+                    .redacted(reason: .placeholder)
+            } else {
+                CreditCardView()
+            }
+            
+            Button {
+                isRedacted.toggle()
+            } label: {
+                Text(isRedacted ? "Show" : "Hide")
+            }
+
         }
-        .padding()
     }
 }
 
